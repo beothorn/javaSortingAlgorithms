@@ -63,14 +63,17 @@ public class App {
         testFiltersB.functionZZZ();
 
         // Run indefinitely until interrupted
-        try {
-            while (true) {
-                Thread.sleep(1000);
-                testFiltersA.threadLoop();
+
+        if(args.length > 0 && Arrays.stream(args).anyMatch(s -> s.equals("nostop"))) {
+            try {
+                while (true) {
+                    Thread.sleep(1000);
+                    testFiltersA.threadLoop();
+                }
+            } catch (InterruptedException e) {
+                // Handle the interruption if necessary
+                System.out.println("Application interrupted.");
             }
-        } catch (InterruptedException e) {
-            // Handle the interruption if necessary
-            System.out.println("Application interrupted.");
         }
     }
 
